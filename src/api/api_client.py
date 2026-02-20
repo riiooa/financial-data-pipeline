@@ -112,8 +112,9 @@ class AlphaVantageClient:
         # Parsing DataFrame (Logika tetap sama)
         time_series_key = 'Time Series (Daily)'
         if time_series_key not in data:
-            logger.error("Invalid API response", symbol=symbol)
-            raise ValueError(f"No time series data found for {symbol}")
+            api_message = data.get('Note') or data.get('Information') or data.get('Error Message')
+            logger.error(f"API Reject: {api_message}", symbol=symbol)
+            raise ValueError(f"No time series data found for {symbol}. Reason: {api_message}")
         
         df = pd.DataFrame.from_dict(data[time_series_key], orient='index')
         df.index = pd.to_datetime(df.index)
