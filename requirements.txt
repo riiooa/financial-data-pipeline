@@ -1,0 +1,10 @@
+requests
+tenacity
+python-dotenv
+pandas
+numpy
+psycopg2-binary
+sqlalchemy
+structlog
+click
+tqdm

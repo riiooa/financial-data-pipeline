@@ -1,0 +1,114 @@
+services:
+  # --- DATABASE (TimescaleDB) ---
+  postgres:
+    image: timescale/timescaledb:latest-pg15
+    container_name: financial-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=financial_db
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../src/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - financial-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- AIRFLOW INIT (Membuat User Otomatis) ---
+  airflow-init:
+    image: apache/airflow:2.7.3
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:12345@postgres/financial_db
+    # Perintah di bawah inisialisasi DB dan membuat admin user
+    command: >
+      bash -c "airflow db init &&
+      airflow users create
+      --username admin
+      --firstname Admin
+      --lastname User
+      --role Admin
+      --email admin@example.com
+      --password admin"
+    networks:
+      - financial-network
+
+  # --- AIRFLOW WEBSERVER ---
+  airflow-webserver:
+    image: apache/airflow:2.7.3
+    container_name: airflow-webserver
+    restart: always
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully 
+    environment:
+      - ALPHA_VANTAGE_API_KEY=UIP77RL5IB114AJ1
+      - LOAD_EX=n
+      - EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:12345@postgres/financial_db
+      - _PIP_ADDITIONAL_REQUIREMENTS=pandas
+    volumes:
+      - ../airflow/dags:/opt/airflow/dags
+      - ../src:/opt/airflow/dags/src
+      - ../logs:/opt/airflow/logs
+      - ../plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    command: webserver
+    networks:
+      - financial-network
+
+  # --- AIRFLOW SCHEDULER ---
+  airflow-scheduler:
+    image: apache/airflow:2.7.3
+    container_name: airflow-scheduler
+    restart: always
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      - ALPHA_VANTAGE_API_KEY=UIP77RL5IB114AJ1
+      - LOAD_EX=n
+      - EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:12345@postgres/financial_db
+      - _PIP_ADDITIONAL_REQUIREMENTS=pandas
+    volumes:
+      - ../airflow/dags:/opt/airflow/dags
+      - ../src:/opt/airflow/dags/src
+      - ../logs:/opt/airflow/logs
+    command: scheduler
+    networks:
+      - financial-network
+
+  # --- DATABASE GUI ---
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: financial-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@financial.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - financial-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  financial-network:
+    driver: bridge
