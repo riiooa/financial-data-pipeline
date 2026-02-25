@@ -50,16 +50,21 @@ services:
       airflow-init:
         condition: service_completed_successfully 
     environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
       - ALPHA_VANTAGE_API_KEY=UIP77RL5IB114AJ1
       - LOAD_EX=n
       - EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:12345@postgres/financial_db
-      - _PIP_ADDITIONAL_REQUIREMENTS=pandas
+      - _PIP_ADDITIONAL_REQUIREMENTS=pandas matplotlib seaborn reportlab==4.0.4 python-dotenv
     volumes:
+      - ../report:/opt/airflow/report
       - ../airflow/dags:/opt/airflow/dags
       - ../src:/opt/airflow/dags/src
       - ../logs:/opt/airflow/logs
       - ../plugins:/opt/airflow/plugins
+      - ../reports:/opt/airflow/reports
+
     ports:
       - "8080:8080"
     command: webserver
@@ -75,15 +80,19 @@ services:
       airflow-init:
         condition: service_completed_successfully
     environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
       - ALPHA_VANTAGE_API_KEY=UIP77RL5IB114AJ1
       - LOAD_EX=n
       - EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:12345@postgres/financial_db
-      - _PIP_ADDITIONAL_REQUIREMENTS=pandas
+      - _PIP_ADDITIONAL_REQUIREMENTS=pandas matplotlib seaborn reportlab==4.0.4 python-dotenv
     volumes:
+      - ../report:/opt/airflow/report
       - ../airflow/dags:/opt/airflow/dags
       - ../src:/opt/airflow/dags/src
       - ../logs:/opt/airflow/logs
+      - ../reports:/opt/airflow/reports
     command: scheduler
     networks:
       - financial-network

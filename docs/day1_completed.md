@@ -79,6 +79,6 @@ Adopted a structured Git workflow using feature branches (e.g., `feature/api-enh
 Prepared a `docker-compose.yml` configuration to orchestrate the complete ecosystem:
 - Apache Airflow  
 - PostgreSQL  
-- Redis  
+- PGAdmin  
 
 ---

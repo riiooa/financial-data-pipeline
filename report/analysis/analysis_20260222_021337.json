@@ -1,0 +1,170 @@
+{
+  "generated_at": "2026-02-22T02:13:37.671325",
+  "data_range": {
+    "start": "1970-01-01",
+    "end": "2026-02-13",
+    "trading_days": 101
+  },
+  "symbols_analyzed": [
+    "AAPL",
+    "AMZN",
+    "GOOGL",
+    "TSLA"
+  ],
+  "symbols_metrics": {
+    "AAPL": {
+      "symbol": "AAPL",
+      "start_date": "1970-01-01",
+      "end_date": "2026-02-13",
+      "total_days": 101,
+      "avg_daily_return": 0.029089999999999953,
+      "std_daily_return": 1.3139238685800034,
+      "total_return": -3.326026154660211,
+      "annualized_return": 137382.12191086926,
+      "annualized_volatility": 2085.789478760762,
+      "sharpe_ratio": 0.35049941877852053,
+      "sortino_ratio": 0.34961095497384675,
+      "max_drawdown": {
+        "max_drawdown": -13.798525455117232,
+        "max_drawdown_date": "2026-01-20",
+        "recovery_date": null,
+        "drawdown_duration_days": 24,
+        "current_drawdown": -10.625808029630663
+      },
+      "var_95": {
+        "var": -1.817915,
+        "cvar": -3.20254,
+        "confidence_level": 0.95
+      },
+      "var_99": {
+        "var": -3.471025999999999,
+        "cvar": -4.9982,
+        "confidence_level": 0.99
+      },
+      "positive_days": 52,
+      "negative_days": 48,
+      "win_rate": 52.0,
+      "avg_win": 0.8884173076923076,
+      "avg_loss": -0.9018479166666666,
+      "profit_factor": 1.0671999852155412,
+      "best_day": 4.0581,
+      "best_day_date": "2026-02-02",
+      "worst_day": -4.9982,
+      "worst_day_date": "2026-02-12",
+      "calmar_ratio": -0.592160681298576
+    },
+    "AMZN": {
+      "symbol": "AMZN",
+      "error": "Insufficient data"
+    },
+    "GOOGL": {
+      "symbol": "GOOGL",
+      "start_date": "1970-01-01",
+      "end_date": "2026-02-13",
+      "total_days": 101,
+      "avg_daily_return": 0.24901300000000007,
+      "std_daily_return": 1.7406967239524487,
+      "total_return": -2.9398691980443203,
+      "annualized_return": 2.1620890367589155e+26,
+      "annualized_volatility": 2763.270383737817,
+      "sharpe_ratio": 2.270182330660843,
+      "sortino_ratio": 2.6772189628457665,
+      "max_drawdown": {
+        "max_drawdown": -24.89364404089149,
+        "max_drawdown_date": "2025-10-10",
+        "recovery_date": "2025-11-24",
+        "drawdown_duration_days": 45,
+        "current_drawdown": -11.047746515755469
+      },
+      "var_95": {
+        "var": -2.393515,
+        "cvar": -2.68776,
+        "confidence_level": 0.95
+      },
+      "var_99": {
+        "var": -2.8428389999999997,
+        "cvar": -3.213,
+        "confidence_level": 0.99
+      },
+      "positive_days": 54,
+      "negative_days": 46,
+      "win_rate": 54.0,
+      "avg_win": 1.4818611111111113,
+      "avg_loss": -1.1982434782608697,
+      "profit_factor": 1.4517717963976255,
+      "best_day": 6.3138,
+      "best_day_date": "2025-11-24",
+      "worst_day": -3.213,
+      "worst_day_date": "2025-12-17",
+      "calmar_ratio": -0.29098951371921944
+    },
+    "TSLA": {
+      "symbol": "TSLA",
+      "start_date": "1970-01-01",
+      "end_date": "2026-02-13",
+      "total_days": 101,
+      "avg_daily_return": 0.01922499999999999,
+      "std_daily_return": 2.8009754622048613,
+      "total_return": 1.3646738866495145,
+      "annualized_return": 12035.482755811632,
+      "annualized_volatility": 4446.410700832956,
+      "sharpe_ratio": 0.10850774533931784,
+      "sortino_ratio": 0.10773839490050319,
+      "max_drawdown": {
+        "max_drawdown": -18.916877602678213,
+        "max_drawdown_date": "2026-02-05",
+        "recovery_date": null,
+        "drawdown_duration_days": 8,
+        "current_drawdown": -14.787294847717808
+      },
+      "var_95": {
+        "var": -4.61858,
+        "cvar": -5.319920000000001,
+        "confidence_level": 0.95
+      },
+      "var_99": {
+        "var": -5.162565999999998,
+        "cvar": -6.6442,
+        "confidence_level": 0.99
+      },
+      "positive_days": 51,
+      "negative_days": 49,
+      "win_rate": 51.0,
+      "avg_win": 2.220647058823529,
+      "avg_loss": -2.2720510204081634,
+      "profit_factor": 1.0172684035372157,
+      "best_day": 6.8245,
+      "best_day_date": "2025-11-24",
+      "worst_day": -6.6442,
+      "worst_day_date": "2025-11-13",
+      "calmar_ratio": 0.18368411188867725
+    }
+  },
+  "correlation_matrix": {
+    "AAPL": {
+      "AAPL": 1.0,
+      "AMZN": NaN,
+      "GOOGL": 0.3619,
+      "TSLA": 0.0989
+    },
+    "AMZN": {
+      "AAPL": NaN,
+      "AMZN": NaN,
+      "GOOGL": NaN,
+      "TSLA": NaN
+    },
+    "GOOGL": {
+      "AAPL": 0.3619,
+      "AMZN": NaN,
+      "GOOGL": 1.0,
+      "TSLA": 0.4117
+    },
+    "TSLA": {
+      "AAPL": 0.0989,
+      "AMZN": NaN,
+      "GOOGL": 0.4117,
+      "TSLA": 1.0
+    }
+  },
+  "rolling_correlation": {
+    "AAPL-AMZN": {

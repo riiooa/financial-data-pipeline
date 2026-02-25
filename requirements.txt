@@ -8,3 +8,10 @@ sqlalchemy
 structlog
 click
 tqdm
+
+matplotlib
+seaborn
+reportlab
+python-dotenv
+pandas
+numpy
